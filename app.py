@@ -29,10 +29,16 @@ litellm.success_callback = [custom_callback]
 spinner = Halo(text='Loading...', spinner='dots')
 spinner.start()
 
-messages = [{ "content": "What is yoru name?","role": "user"}]
+messages = [
+    {"role": "user", "content": "What is yoru name?"},
+    {"role": "system", "content": "You are an AI assistant tasked to provide short answers with simple language."}
+    ]
 
 # call llm
-response = completion(model="claude-3-opus-20240229", messages=messages)
+response = completion(
+    model="claude-3-opus-20240229", 
+    messages=messages,
+    temperature=0.5)
 
 # Stop the spinner after getting response
 spinner.stop()
